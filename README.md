@@ -5,17 +5,71 @@
 ### **Dataflow Diagram** :
 ![AWS_CopyData_Between_S3](https://user-images.githubusercontent.com/96478746/169760292-90e69a83-95dd-43b2-b80c-4b285d8aea3b.jpg)
 
-### **Creating a Lex Bot**
+## **Creating a Lex Bot**
 
 Our first goal is to create a simple chatbot in the LEX console that can gather basic information from a user, which we call "eliciting slots".
 
-**Steps for creating a LEX bot**
+### **Steps for creating a LEX bot**
 
     1. Go to Amazon Lex
     2. Make sure you are in the N. Virginia region at the top right
-    3. Under Create Your Own choose Custom Bot
-    4. Name the Bot: WeatherCatBot
-    5. For Output voice, Leave it as: None (This is only a text based application)
-    6. Change the Session timeout to 1 minute
-    7. Leave the IAM role as ANSServiceRoleForLexBots
-    8. For COPPA choose No
+    3. Under Creation method, choose Create a blank bot
+    4. Bot Name: WeatherCatBot
+    5. Under IAM permissions, choose Create a role with basic Amazon Lex permissions
+    6. Under Children’s Online Privacy Protection Act (COPPA), choose No
+    7. Under Idle session timeout, choose 1 minute
+    8. Under Language, choose English (AU)
+
+Now we have created a bot we need to prepare it for the type of questions we might throw at it.
+If we prepare LEX correctly with a good sample set of questions (that are basically saying the same
+thing) it can use it as "training data".
+
+The idea is that over time, and the more it is used, it can figure out what you are trying to imply. Or what you mean when you talk to it. Pretty cool right? Even if you ask it a question that is not in the sample questions you supply, it is usually smart enough to figure out your intent anyway.
+
+So lets say you want to know if it is too cold for you cat, there are a gazillion edge case ways that you might phase that conversationally right?
+
+"Hey silly bot, cool enough for my cat yet?"
+
+"Cat bot, I bet it is too hot for my cat in Arizona, isn't it?"
+
+"Can my cat go outside yet? He's really bored..oh yeah we're in Texas."...the list goes on. 
+
+They call these common question samples "utterances".
+
+We obviously can't type every conceivable utterance, and we don't need to. LEX is pretty smart, and gets smarter over time. We just need to provide a good sample of commonly phased questions that you think users would say. These are related to the INTENT of finding out if your cat should go out or not. And let LEX over time, figure out all the fancy humanized edge case intents.
+
+Let's do that now.
+
+### **Steps for creating an Intent**
+
+    1. Under Intent details, Intent name : CatWeather
+    2. Uder Sample utterances, write "Can my cat go outside?"
+    3. Click on Add utterance
+    4. Enter these five utterances one at a time, in order:
+        a. Can my cat go outside?
+        b. Is it warm enough for my cat?
+        c. Can I let my cat out in {city_str} ?
+        d. Should my cat wear booties in {city_str} ?
+        e. Will my cat stay dry in {city_str} ?
+
+Did you notice the (city str}? Think of this as a variable, as the user can say any city they want.
+This maps to what we call a SLOT.
+
+The advantage in putting this in our utterances, is that if a slot is used in the initial user utterance the LEX bot has all it needs. It no longer needs to elicit that slot and ask the user what city, because it has just been volunteered.
+
+Are you ready to create the slot that we used as a placeholder as city str in some of our utterances?
+
+### **Steps for creating a Slot**
+
+    1. Under the Slots, choose Add slot
+    2. Type city_str under Name
+    3. For Slot type start typing in AMAZON.City
+    4. Under Prompt, type which city? and hit Add
+    5. {city_str} will now be colorized in the Sample utterances drop down
+
+Before you save your intent, we want to humanize it a little more by configuring a confirmation step
+with "So you want to know if your cat can go out today in (city_str)?"
+
+Let's add this now.
+
+
