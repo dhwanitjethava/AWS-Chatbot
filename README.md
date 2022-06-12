@@ -1,11 +1,8 @@
 # **AWS : Building Serverless Application**
 ### **Services used** :
-    Amazon Lex, Amazon S3, 
+    Amazon Lex, Amazon S3,
 
-### **Dataflow Diagram** :
-![AWS_CopyData_Between_S3](https://user-images.githubusercontent.com/96478746/169760292-90e69a83-95dd-43b2-b80c-4b285d8aea3b.jpg)
-
-## **Creating a Lex Bot**
+## **1. Creating a Lex Bot**
 
 Our first goal is to create a simple chatbot in the LEX console that can gather basic information from a user, which we call "eliciting slots".
 
@@ -32,7 +29,7 @@ So lets say you want to know if it is too cold for you cat, there are a gazillio
 
 "Cat bot, I bet it is too hot for my cat in Arizona, isn't it?"
 
-"Can my cat go outside yet? He's really bored..oh yeah we're in Texas."...the list goes on. 
+"Can my cat go outside yet? He's really bored..oh yeah we're in Texas."...the list goes on.
 
 They call these common question samples "utterances".
 
@@ -72,4 +69,45 @@ with "So you want to know if your cat can go out today in (city_str)?"
 
 Let's add this now.
 
+    1. Expand Confirmation prompts and decline responses
+    2. Under Confirm Prompt type in the following:
+        -> So you want to know if your cat can go out today in {city_str}?
+    3. Under Decline response type in the following:
+        -> Sorry, can you please repeat your initial question?
+    4. Expand Fulfillment
+    5. On successful fulfillment type in the following:
+        -> Your request completed successfully
+    6. In case of failure type in the following:
+        -> Something went wrong
+    7. Click Save Intent at the bottom
+    8. Click Build at the bottom
 
+### **Steps for testing the bot in the Lex console**
+
+    1. Click Test at the bottom
+    2. Try these conversations so you can see how LEX responds to you in different scenarios,
+
+Chatbot                                                         | User
+----------------------------------------------------------------|---------------------------------------
+-                                                               |Will my cat stay dry in Seattle?
+So you want to know if your cat can go out today in Seattle?    |-
+-                                                               |Yes
+Intent CatWeater is ReadyForFulfillment: city str:Seattle       |-
+-                                                               |Can I let my cat out in Arizona?
+So you want to know if your cat can go out today in Arizona?    |-
+-                                                               |Yes
+Intent CatWeather is ReadyForFulfillment: city:Arizona          |-
+-                                                               |Is it warm enough for my cat?
+Which city?                                                     |-
+-                                                               |Denver
+So you want to know if your cat can go out today in Denver?     |-
+-                                                               |Sure
+Intent CatWeather is ReadyForFulfillment: city:Denver           |-
+-                                                               |Is it too cold for my cat?
+Which city?                                                     |-
+-                                                               |Las Vegas                        |-
+So you want to know if your cat can go out today in Las Vegas?  |-
+-                                                               |Yes
+Intent CatWeather is ReadyForFulfillment: city:Las Vegas        |-
+
+**NOTE**: Notice we didn't include "Is it to cold for my cat?" in the utterances. Yet chat bot is intelligent enough to prompt us for the city. I think that is so cool. LEX can actually figure out what you are trying to ask.
