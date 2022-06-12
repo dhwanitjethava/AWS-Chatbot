@@ -87,27 +87,27 @@ Let's add this now.
     1. Click Test at the bottom
     2. Try these conversations so you can see how LEX responds to you in different scenarios,
 
-Chatbot                                                         | User
-----------------------------------------------------------------|---------------------------------------
--                                                               |Will my cat stay dry in Seattle?
-So you want to know if your cat can go out today in Seattle?    |-
--                                                               |Yes
-Intent CatWeater is ReadyForFulfillment: city str:Seattle       |-
--                                                               |Can I let my cat out in Arizona?
-So you want to know if your cat can go out today in Arizona?    |-
--                                                               |Yes
-Intent CatWeather is ReadyForFulfillment: city:Arizona          |-
--                                                               |Is it warm enough for my cat?
-Which city?                                                     |-
--                                                               |Denver
-So you want to know if your cat can go out today in Denver?     |-
--                                                               |Sure
-Intent CatWeather is ReadyForFulfillment: city:Denver           |-
--                                                               |Is it too cold for my cat?
-Which city?                                                     |-
--                                                               |Las Vegas                        |-
-So you want to know if your cat can go out today in Las Vegas?  |-
--                                                               |Yes
-Intent CatWeather is ReadyForFulfillment: city:Las Vegas        |-
+| Chatbot                                                        | User                              |
+|:---:                                                           |:---:                              |
+|                                                                | Will my cat stay dry in Seattle?  |
+| So you want to know if your cat can go out today in Seattle?   |                                   |
+|                                                                | Yes                               |
+| Intent CatWeater is ReadyForFulfillment: city str:Seattle      |                                   |
+|                                                                | Can I let my cat out in Arizona?  |
+| So you want to know if your cat can go out today in Arizona?   |                                   |
+|                                                                | Yes                               |
+| Intent CatWeather is ReadyForFulfillment: city:Arizona         |                                   ||                                                                | Is it warm enough for my cat?     |
+| Which city?                                                    |                                   |
+|                                                                | Denver                            |
+| So you want to know if your cat can go out today in Denver?    |                                   |
+|                                                                | Sure                              |
+| Intent CatWeather is ReadyForFulfillment: city:Denver          |                                   |
+|                                                                | Is it too cold for my cat?        |
+| Which city?                                                    |                                   |
+|                                                                | Las Vegas                         |
+| So you want to know if your cat can go out today in Las Vegas? |                                   |
+|                                                                | Yes                               |
+| Intent CatWeather is ReadyForFulfillment: city:Las Vegas       |                                   |
+
 
 **NOTE**: Notice we didn't include "Is it to cold for my cat?" in the utterances. Yet chat bot is intelligent enough to prompt us for the city. I think that is so cool. LEX can actually figure out what you are trying to ask.
