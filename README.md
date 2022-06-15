@@ -116,10 +116,10 @@ Let's add this now.
 
 As you would imagine, creating an application like this involves many moving parts. We will need:
 
-    a front end web site
-    a backend API
-    some sort of logic (functional intelligence)
-    a data source
+- a front end web site
+- a backend API
+- some sort of logic (functional intelligence)
+- a data source
 
 We already have a website front end all prepared in a zip file. All you need to do is download this zip file, unzip it and push it into the cloud. We will use S3 (Simple Storage Service) which can happily "host" these kinds of static websites.
 
