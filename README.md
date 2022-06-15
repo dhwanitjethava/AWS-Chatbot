@@ -163,4 +163,20 @@ Now let's get the website up there.
 
 ### **Steps to upload objects to an existing S3 bucket**
 1. Firstly, download this ZIP file : [S3_Website](https://s3.amazonaws.com/awsu-hosting/CSA-TF-100-SCSRVL-10-EN/s3website.zip)
-2. 
+2. Unzip it on your local machine
+3. Upload all files and folders to your S3 bucket
+4. Leave the permissions settings alone as the defaults
+5. Under Properties, scroll down to Metadata
+6. Add Metadata
+    - Type : System defined
+    - Key : Cache-Control
+    - Value : max-age=0
+7. Click Upload
+8. Verify connectivity by browsing to your tab website where you had the 404 error
+9. You should see your shiny new text based static web based application (see image below)
+
+    ![1](https://user-images.githubusercontent.com/96478746/173877732-f449fc1b-3dea-4bcf-b1d5-ee2d83cf68b2.png)
+
+10. Press the section "Choose a city" it will give you a choice of cities, then press Ask Weather Bot
+
+**Note**: As of right now, every city you choose will return 20 degrees. This is because this is just a static website.
