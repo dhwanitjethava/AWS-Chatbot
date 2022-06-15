@@ -161,6 +161,3 @@ This bucket will now have public access as it will host our web objects. You wil
 Now let's get the website up there.
 
 ### **Steps to upload objects to an existing S3 bucket**
-
-    1. Download the ZIP file at: https://s3.amazonaws.com/awsu-hosting/CSA-TF-100-SCSRVL-10-EN/s3website.zip
-    
