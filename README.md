@@ -111,3 +111,56 @@ Let's add this now.
 
 
 **NOTE**: Notice we didn't include "Is it to cold for my cat?" in the utterances. Yet chat bot is intelligent enough to prompt us for the city. I think that is so cool. LEX can actually figure out what you are trying to ask.
+
+## **2. Creating a S3 bucket and configuring as a static website**
+
+As you would imagine, creating an application like this involves many moving parts. We will need:
+
+    a front end web site
+    a backend API
+    some sort of logic (functional intelligence)
+    a data source
+
+We already have a website front end all prepared in a zip file. All you need to do is download this zip file, unzip it and push it into the cloud. We will use S3 (Simple Storage Service) which can happily "host" these kinds of static websites.
+
+### **Steps to create a S3 bucket and configure it as an static website**
+
+    1. Go to the Amazon S3 Console
+    2. Click Create bucket
+    3. Type a unique DNS-compliant name for your new bucket
+    4. For Region choose US East (N. Virginia)
+    5. Under Block Public Access settings for this bucket, Deselect Block all public access
+    6. Under Bucket Versioning, Select Enable Versioning
+    7. Click on the bucket and select the Properties, Enable Static Website Hosting
+        - Hosting type : Host a static website
+        - Index document : text.html
+        - Error document : error.html
+    8. Click the endpoint. It show an error 403 forbidden, as no permissions have been added yet
+    9. Select the Permissions tab and choose Bucket Policy
+    10. Paste the following code below in the Bucket policy editor
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "AddPerm",
+                    "Effect": "Allow",
+                    "Principal": "*",
+                    "Action": [
+                        "s3:GetObject"
+                    ],
+                    "Resource": [
+                        "arn:aws:s3:::<name of the bucket>/*"
+                    ]
+                }
+            ]
+        }
+    11. Click Save
+
+This bucket will now have public access as it will host our web objects. You will notice you can now see absolutely nothing. i.e you will get a 404 error.
+
+Now let's get the website up there.
+
+### **Steps to upload objects to an existing S3 bucket**
+
+    1. Download the ZIP file at: https://s3.amazonaws.com/awsu-hosting/CSA-TF-100-SCSRVL-10-EN/s3website.zip
+    
