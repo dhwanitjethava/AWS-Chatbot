@@ -1,6 +1,6 @@
 # **AWS : Building Serverless Application**
 ### **Services used** :
-    Amazon Lex, Amazon S3,
+    Amazon Lex, Amazon S3, Amazon CloudFront, Amazon API Gateway
 
 ## **1. Creating a Lex Bot**
 
@@ -262,3 +262,4 @@ want
 10. Now go to CloudFront console and click on Distribution ID
 11. Copy the URL under Distribution Domain Name
 12. Browse to that URL and you should now see the text.html page
+
