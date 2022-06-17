@@ -219,3 +219,46 @@ Refresh your website. You should now see the changes. Awesome!
     - Under Viewer
         - Viewer Protocol Policy : **Redirect HTTP to HTTPS**
         - Allowed HTTP methods : **GET, HEAD**
+        - Restrict viewer access : **No**
+    - Under Cache key and origin requests
+        - Smooth streaming : **No**
+        - Field-level encryption : Leave it blank
+        - Enable real-time logs : **No**
+    - Under Settings
+        - Price class : **Use all edge locations (best performance)**
+        - Supported HTTP versions : checked **HTTP/2**
+        - Default Root Object : **text.html**
+        - Standard logging : **Off**
+        - IPv6 : **On**
+6. Click Create Distribution
+
+### **Restrict our S3 bucket policy to CloudFront**
+
+1. Go to S3 console
+2. Click your bucket and go to permissions
+3. Select Bucket Policy
+4. We can see that CloudFront has added what we call an "**Origin Access Identity**" to the policy
+5. Remove the public S3 access section so it looks more like the following:
+        
+        {
+	        "Version": "2012-10-17",
+	        "Statement": [
+		        {
+			        "Sid": "2",
+			        "Effect": "Allow",
+			        "Principal": {
+				        "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E3IQK2C7HY3E65"
+			        },
+			        "Action": "s3:GetObject",
+			        "Resource": "arn:aws:s3:::<your bucket name>/*"
+		        }
+	        ]
+        }
+6. This will only allow our specific CloudFront distribution access to our S3 bucket which is what we
+want
+7. Click Save
+8. Now browse your S3 bucket endpoint
+9. You will see a 403 Forbidden as we effectively removed public access via the bucket policy
+10. Now go to CloudFront console and click on Distribution ID
+11. Copy the URL under Distribution Domain Name
+12. Browse to that URL and you should now see the text.html page
