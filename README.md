@@ -200,3 +200,22 @@ please make the following change to your local copy of *text.html*
 4. Click upload
 
 Refresh your website. You should now see the changes. Awesome!
+
+## **3. Creating a CloudFront distribution**
+
+### **Steps for creating a CloudFront distribution**
+
+1. Go to CloudFront Console
+2. Please select Global region at the top right
+3. Click on Create CloudFront Distribution
+4. Under Origin
+    - Origin Domain : **Pick the website bucket you created**
+    - Leave Origin Path blank
+    - S3 bucket access : Select **Yes use OAI** (bucket can restrict access to only CloudFront)
+    - Under Origin access identity, Create new OAI
+    - Under Bucket policy, choose **Yes, update the bucket policy**
+    - Under Enable Origin Shield, choose **No**
+5. Under Default cache behavior
+    - Under Viewer
+        - Viewer Protocol Policy : **Redirect HTTP to HTTPS**
+        - Allowed HTTP methods : **GET, HEAD**
