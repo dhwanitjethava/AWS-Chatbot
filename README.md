@@ -15,7 +15,7 @@ Our first goal is to create a simple chatbot in the LEX console that can gather 
 5. Under IAM permissions, choose Create a role with basic Amazon Lex permissions
 6. Under Children’s Online Privacy Protection Act (COPPA), choose No
 7. Under Idle session timeout, choose 1 minute
-8. Under Language, choose English (AU)
+8. Under Language, choose English (Australia)
 
 Now we have created a bot we need to prepare it for the type of questions we might throw at it.
 If we prepare LEX correctly with a good sample set of questions (that are basically saying the same
